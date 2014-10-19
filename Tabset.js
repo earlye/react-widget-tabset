@@ -9,9 +9,9 @@ define(['react'],function(React){
 
         render : function() {
             if ( this.props.state.active ) {
-                return ( <span onClick={this.onTabClick}> {this.props.state.title} </span> );
+                return ( <span className={this.props.className} onClick={this.onTabClick}> {this.props.state.title} </span> );
             } else {
-                return ( <span onClick={this.onTabClick}> {this.props.state.title} </span> );
+                return ( <span className={this.props.className} onClick={this.onTabClick}> {this.props.state.title} </span> );
             }
         }
     });
@@ -36,12 +36,17 @@ define(['react'],function(React){
             var Self = this;
 
             var Tabs = this.props.state.tabs.map(function(entry){
+                var tabClass = Self.props.state.classes.inactive;
+                var key = entry.key;
+
                 if ( entry.active ) {
+                    tabClass = Self.props.state.classes.active;
                     if ( entry.page != undefined ) {
                         Page = entry.page;
                     }
                 }
-                result = ( <TabButton state={entry} tabSet={Self}/> );
+
+                result = ( <TabButton key={entry.key} className={tabClass} state={entry} tabSet={Self}/> );
                 return result;
             });
 

@@ -1,10 +1,10 @@
 react-widget-tabset
 ===================
 
-A react-js tabset widget. In its parent, you can specify a series of page react widgets, and
-during the Tabset's render method, only the currently active page widget will be rendered;
-this means that the browser's DOM ought to be fairly lean - you won't have DOM built up
-for hidden pages.
+A react-js tabset widget. As part of its state, you can specify a series of page
+react widgets, and during the Tabset's render method, only the currently active
+page widget will be rendered; this means that the browser's DOM ought to be
+fairly lean - you won't have DOM built up for hidden pages.
 
 Here's a simple example:
 
@@ -24,6 +24,8 @@ define(['react','jsx!Tabset'], function(React,Tabset) {
 
     var TabsConfig =
             {
+                classes : { "active" : "activeTabClass" , "inactive" : "inactiveTabClass" },
+                
                 tabs: [ { "key" : "profile" , "title" : "Profile" , "active" : true , "page" : Page1() },
                         { "key" : "learn"  , "title" : "Learn" , "page" : Page2() },
                         { "key" : "skills" , "title" : "Skills" , "page" : Page3() },
@@ -38,5 +40,8 @@ define(['react','jsx!Tabset'], function(React,Tabset) {
 });
 ```
 
-This is still a work in progress. For example, tabs do not change CSS classes to reflect their
-current state.  That's coming soon.
+## Backlog
+
+* Make it where the Tabset can have a controller.
+
+* Have Tabset notify its controller that pages are changing so the controller can rewrite the browser's URL.
