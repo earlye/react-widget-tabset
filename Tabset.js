@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
-define(['react'],function(React){
+define(['react','jquery'],function(React,$){
 
     var TabButton = React.createClass({
         onTabClick : function(event) {
-            this.props.tabSet.activatePage( this.props.state );
+            this.props.tabSet.activatePage( this.props.key );
         },
 
         render : function() {
@@ -23,8 +23,8 @@ define(['react'],function(React){
             // Do a simple linear search to find the page in our list of tabs, and activate it.
             // In the same process, deactivate all the other tabs.
             var nextProps = this.props;
-            nextProps.state.tabs.map(function(entry) {
-                entry.active = ( page === entry );
+            $.each(nextProps.state.tabs,function(key,entry) {
+                entry.active = ( page === key );
             });
 
             this.setState(nextProps);
@@ -35,9 +35,8 @@ define(['react'],function(React){
             var Page = null;
             var Self = this;
 
-            var Tabs = this.props.state.tabs.map(function(entry){
+            var Tabs = $.map(this.props.state.tabs, function(entry,key){
                 var tabClass = Self.props.state.classes.inactive;
-                var key = entry.key;
 
                 if ( entry.active ) {
                     tabClass = Self.props.state.classes.active;
@@ -46,7 +45,7 @@ define(['react'],function(React){
                     }
                 }
 
-                result = ( <TabButton key={entry.key} className={tabClass} state={entry} tabSet={Self}/> );
+                result = ( <TabButton key={key} className={tabClass} state={entry} tabSet={Self}/> );
                 return result;
             });
 

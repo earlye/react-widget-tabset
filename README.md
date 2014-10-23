@@ -26,10 +26,10 @@ define(['react','jsx!Tabset'], function(React,Tabset) {
             {
                 classes : { "active" : "activeTabClass" , "inactive" : "inactiveTabClass" },
                 
-                tabs: [ { "key" : "profile" , "title" : "Profile" , "active" : true , "page" : Page1() },
-                        { "key" : "learn"  , "title" : "Learn" , "page" : Page2() },
-                        { "key" : "skills" , "title" : "Skills" , "page" : Page3() },
-                        { "key" : "jobs"   , "title" : "Jobs" , "page" : Page4() } ]
+                tabs: { "page1" : { "title" : "Page 1" , "page" : Page1() , "active" : true },
+                        "page2" : { "title" : "Page 2" , "page" : Page2() },
+                        "page3" : { "title" : "Page 3" , "page" : Page3() },
+                        "page4" : { "title" : "Page 4" , "page" : Page4() } }
             };
 
     React.renderComponent(
